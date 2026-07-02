@@ -1,0 +1,41 @@
+---
+import { content } from '../content';
+import { L, t, type Lang } from '../i18n';
+import Placeholder from './Placeholder.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const p = content.profile;
+const telHref = 'tel:' + p.phone.replace(/\s/g, '');
+---
+
+<section class="hero wrap" id="top">
+  <div>
+    <span class="pill"><span class="status-dot"></span>{t('available', lang)}</span>
+    <div class="kicker">{L(p.role, lang)}</div>
+    <h1>{p.name}</h1>
+    <p class="lede">{L(p.summary, lang)}</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn btn-primary" href={p.cv} download>↓ {t('downloadCV', lang)}</a>
+      <a class="btn btn-outline" href="#contact">{t('getInTouch', lang)}</a>
+    </div>
+    <div class="contact-card">
+      <div class="mono" style="font-size:12px;color:var(--txt3);margin-bottom:12px">$ cat contact.txt</div>
+      <div class="contact-grid">
+        <span style="color:var(--accentTx)">email</span><a href={`mailto:${p.email}`}>{p.email}</a>
+        <span style="color:var(--accentTx)">phone</span><a href={telHref}>{p.phone}</a>
+      </div>
+    </div>
+  </div>
+  <div class="photo-frame">
+    <div class="frame-bar">
+      <span class="dot" style="background:#ff5f57"></span>
+      <span class="dot" style="background:#febc2e"></span>
+      <span class="dot" style="background:#28c840"></span>
+      <span style="margin-left:6px">~/marcin.jpg</span>
+    </div>
+    <Placeholder class="photo-slot" label="photo" />
+  </div>
+</section>
