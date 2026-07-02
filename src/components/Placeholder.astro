@@ -1,0 +1,12 @@
+---
+interface Props {
+  class?: string;
+  label?: string;
+  id?: string;
+}
+const { class: className, label = '', id } = Astro.props;
+---
+
+<div class={className} id={id} data-image-slot>
+  <span class="img-slot-label mono">{label}</span>
+</div>

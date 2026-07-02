@@ -1,0 +1,16 @@
+---
+import { content } from '../content';
+import { t, type Lang } from '../i18n';
+import JobCard from './JobCard.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<section class="sec wrap" id="experience">
+  <div class="sec-eyebrow mono">$ git log --oneline --all</div>
+  <h2 class="sec-title">{t('experience', lang)}</h2>
+  {content.jobs.map((job) => <JobCard job={job} lang={lang} />)}
+</section>

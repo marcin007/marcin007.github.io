@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import Sections from '../../components/Sections.astro';
+import { content } from '../../content';
+import { L } from '../../i18n';
+
+const lang = 'pl' as const;
+const title = `${content.profile.name} — ${L(content.profile.role, lang)}`;
+const description = L(content.profile.summary, lang);
+---
+
+<Base lang={lang} title={title} description={description}>
+  <Sections lang={lang} />
+</Base>

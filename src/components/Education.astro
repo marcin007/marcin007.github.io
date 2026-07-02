@@ -1,0 +1,34 @@
+---
+import { content } from '../content';
+import { L, t, type Lang } from '../i18n';
+import Placeholder from './Placeholder.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const e = content.education;
+---
+
+<div class="edu">
+  <div class="edu-top"></div>
+  <span class="corner tl"></span><span class="corner br"></span>
+  <div class="edu-body">
+    <div class="edu-crest-wrap">
+      <div class="edu-crest-glow"></div>
+      <Placeholder class="edu-crest" label="logo" />
+    </div>
+    <div>
+      <div class="mono" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accentTx);margin-bottom:11px">{t('education', lang)}</div>
+      <div style="font-size:22px;font-weight:700;letter-spacing:-.01em;line-height:1.15">{L(e.school, lang)}</div>
+      <div style="font-size:14.5px;color:var(--txt2);margin-top:7px">{L(e.degreeTitle, lang)} · {L(e.field, lang)}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:15px">
+        <span class="pill"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent2)"></span>{L(e.location, lang)}</span>
+      </div>
+    </div>
+    <div class="edu-year">
+      <div style="font:700 42px 'IBM Plex Mono',monospace;color:var(--accentTx);letter-spacing:-.02em;line-height:1">{e.year}</div>
+      <div class="mono" style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-top:9px">{t('graduated', lang)}</div>
+    </div>
+  </div>
+</div>

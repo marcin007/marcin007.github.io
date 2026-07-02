@@ -1,0 +1,48 @@
+---
+import { t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<div class="nav">
+  <div class="dots">
+    <span class="dot" style="background:#ff5f57"></span>
+    <span class="dot" style="background:#febc2e"></span>
+    <span class="dot" style="background:#28c840"></span>
+  </div>
+  <span class="mono" style="font-size:12.5px;color:var(--txt2)">marcin@portfolio<span style="color:var(--accentTx)"> ~ </span>./whoami</span>
+  <nav class="nav-links">
+    <a href="#skills">{t('skills', lang)}</a>
+    <a href="#certs">{t('certs', lang)}</a>
+    <a href="#experience">{t('experience', lang)}</a>
+    <a href="#contact">{t('contact', lang)}</a>
+    <span class="divider"></span>
+    <span class="seg">
+      <a href="/" aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
+      <a href="/pl/" aria-current={lang === 'pl' ? 'page' : undefined}>PL</a>
+    </span>
+    <button class="btn-ghost" id="theme-toggle" aria-label="Toggle theme">◐ <span class="theme-label"></span></button>
+  </nav>
+</div>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  const label = btn?.querySelector('.theme-label');
+  const sync = () => {
+    if (label) label.textContent = document.documentElement.dataset.theme === 'dark' ? 'Light' : 'Dark';
+  };
+  sync();
+  btn?.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem('mw_theme', next);
+    } catch (e) {
+      /* ignore */
+    }
+    sync();
+  });
+</script>

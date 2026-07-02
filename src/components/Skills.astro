@@ -1,0 +1,22 @@
+---
+import { content } from '../content';
+import { L, t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<section class="sec wrap" id="skills">
+  <div class="sec-eyebrow">// stack</div>
+  <h2 class="sec-title">{t('skills', lang)}</h2>
+  <div class="skills-grid">
+    {content.skills.map((s) => (
+      <div class="skill-card">
+        <h3>{L(s.label, lang)}</h3>
+        <div class="chips">{s.items.map((i) => <span class="chip">{i}</span>)}</div>
+      </div>
+    ))}
+  </div>
+</section>

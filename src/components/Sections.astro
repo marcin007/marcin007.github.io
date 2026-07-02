@@ -1,0 +1,23 @@
+---
+import Nav from './Nav.astro';
+import Hero from './Hero.astro';
+import Metrics from './Metrics.astro';
+import Skills from './Skills.astro';
+import Certifications from './Certifications.astro';
+import Experience from './Experience.astro';
+import Contact from './Contact.astro';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+
+<Nav lang={lang} />
+<Hero lang={lang} />
+<Metrics lang={lang} />
+<Skills lang={lang} />
+<Certifications lang={lang} />
+<Experience lang={lang} />
+<Contact lang={lang} />
