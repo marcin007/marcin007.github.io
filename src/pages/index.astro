@@ -1,5 +1,16 @@
-<!doctype html>
-<html lang="en">
-  <head><meta charset="utf-8" /><title>bootstrap</title></head>
-  <body><h1>bootstrap ok</h1></body>
-</html>
+---
+import Base from '../layouts/Base.astro';
+import { content } from '../content';
+import { L } from '../i18n';
+
+const lang = 'en' as const;
+const title = `${content.profile.name} — ${L(content.profile.role, lang)}`;
+const description = L(content.profile.summary, lang);
+---
+
+<Base lang={lang} title={title} description={description}>
+  <main style="padding:44px">
+    <h1>{content.profile.name}</h1>
+    <p class="lede">{L(content.profile.summary, lang)}</p>
+  </main>
+</Base>
