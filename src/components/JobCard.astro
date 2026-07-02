@@ -1,0 +1,50 @@
+---
+import { L, t, type Lang } from '../i18n';
+import type { Job } from '../types';
+
+interface Props {
+  job: Job;
+  lang: Lang;
+}
+const { job, lang } = Astro.props;
+---
+
+<div class="job">
+  <div class="job-rail">
+    <div style="display:flex;align-items:center;gap:9px">
+      <span class="job-node" style={`border:3px solid ${job.dot}`}></span>
+      <span class="mono" style="font-size:12px;color:var(--txt3)">{job.hash}</span>
+    </div>
+    <div class="mono" style="font-size:12px;color:var(--txt2);margin:10px 0 0 22px">{job.period}<span style="color:var(--accentTx)">{job.periodEnd ? L(job.periodEnd, lang) : ''}</span></div>
+    <div class="job-line"></div>
+  </div>
+  <div class="job-card">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span style="font-size:20px;font-weight:700;letter-spacing:-.01em">{job.company}</span>
+      <span style="color:var(--txt3)">/</span>
+      <span style="font-size:15px;color:var(--txt2)">{L(job.role, lang)}</span>
+      {job.current && <span class="job-tag">● {t('present', lang)}</span>}
+    </div>
+    <div class="tech-row">{job.tech.map((x) => <span class="tech">{x}</span>)}</div>
+    <p style="font-size:14px;line-height:1.65;color:var(--txt2);margin:0">{L(job.context, lang)}</p>
+    {job.highlights && job.highlights.length > 0 && (
+      <Fragment>
+        <div class="hl-label" style="margin:22px 0 12px">{t('keyAchievements', lang)}</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          {job.highlights.map((h) => (
+            <div class="hl">
+              <div class="hl-title">{L(h.title, lang)}</div>
+              <div class="hl-grid">
+                <span class="hl-k" style="color:#ff5f57">{t('problem', lang)}</span><span style="color:var(--txt2)">{L(h.problem, lang)}</span>
+                <span class="hl-k" style="color:var(--accent2)">{t('approach', lang)}</span><span style="color:var(--txt2)">{L(h.approach, lang)}</span>
+                <span class="hl-k" style="color:#28c840">{t('impact', lang)}</span><span style="color:var(--txt);font-weight:500">{L(h.impact, lang)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Fragment>
+    )}
+    <div class="hl-label" style="margin:20px 0 10px">{t('coreScope', lang)}</div>
+    <ul class="points">{job.points.map((pt) => <li><span class="mk">▸</span><span>{L(pt, lang)}</span></li>)}</ul>
+  </div>
+</div>
