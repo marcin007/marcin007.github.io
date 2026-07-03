@@ -1,7 +1,9 @@
 ---
 import { content } from '../content';
 import { L, t, type Lang } from '../i18n';
-import Placeholder from './Placeholder.astro';
+import { Image } from 'astro:assets';
+import marcinPhoto from '../assets/marcin.jpg';
+import PhotoReframe from './PhotoReframe.astro';
 
 interface Props {
   lang: Lang;
@@ -36,6 +38,18 @@ const telHref = 'tel:' + p.phone.replace(/\s/g, '');
       <span class="dot" style="background:#28c840"></span>
       <span style="margin-left:6px">~/marcin.jpg</span>
     </div>
-    <Placeholder class="photo-slot" label="photo" />
+    <div class="photo-media">
+      <Image
+        src={marcinPhoto}
+        alt={`${p.name} — ${L(p.role, lang)}`}
+        class="photo-img"
+        widths={[400, 600, 900, 1200]}
+        sizes="(max-width: 900px) 92vw, 480px"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
   </div>
 </section>
+
+{import.meta.env.DEV && <PhotoReframe />}
