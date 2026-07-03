@@ -1,0 +1,101 @@
+---
+// Dev-only on-site reframe panel for the hero photo.
+// Rendered only under `import.meta.env.DEV` (see Hero.astro), so it is stripped
+// from production builds. Drag the photo / scroll to zoom; it live-updates the
+// real `.photo-img` CSS vars and gives you the values to paste into global.css.
+---
+
+<div id="rfPanel" style="position:fixed;right:16px;bottom:16px;z-index:9999;width:250px;background:var(--bg2);border:1px solid var(--line2);border-radius:12px;padding:12px 13px;box-shadow:0 16px 40px -12px rgba(0,0,0,.5);font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--txt)">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+    <span style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--txt3)">reframe · dev</span>
+    <button id="rfHide" title="Ukryj panel" aria-label="Ukryj panel" style="margin-left:auto;appearance:none;border:0;background:transparent;color:var(--txt3);cursor:pointer;font-size:17px;line-height:1;padding:0 2px">×</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+    <span style="font-size:12px;color:var(--txt3)">zoom</span>
+    <input id="rfZoom" type="range" min="1" max="3" step="0.01" value="1" aria-label="Zbliżenie" style="flex:1;accent-color:var(--accent)" />
+    <span id="rfZval" style="font:600 12px 'IBM Plex Mono',monospace;color:var(--accentTx);min-width:42px;text-align:right">1.00×</span>
+  </div>
+  <div id="rfCode" style="font:12px/1.5 'IBM Plex Mono',monospace;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 9px;color:var(--txt);overflow-x:auto;white-space:nowrap;margin-bottom:9px">--photo-zoom:1; --photo-x:0%; --photo-y:0%;</div>
+  <div style="display:flex;gap:7px">
+    <button id="rfCopy" style="flex:1;appearance:none;border:1px solid var(--line2);background:transparent;color:var(--txt);font:500 12px 'IBM Plex Sans',sans-serif;padding:6px 8px;border-radius:7px;cursor:pointer">Kopiuj CSS</button>
+    <button id="rfReset" style="appearance:none;border:1px solid var(--line2);background:transparent;color:var(--txt2);font:500 12px 'IBM Plex Sans',sans-serif;padding:6px 10px;border-radius:7px;cursor:pointer">Reset</button>
+  </div>
+  <div id="rfHint" style="margin-top:8px;font-size:11px;color:var(--txt3);text-align:center">przeciągnij zdjęcie · scroll = zoom</div>
+</div>
+
+<script is:inline>
+  (function () {
+    var img = document.querySelector('.photo-img');
+    var frame = document.querySelector('.photo-media') || document.querySelector('.photo-frame');
+    var panel = document.getElementById('rfPanel');
+    if (!img || !frame || !panel) return;
+    var zoom = document.getElementById('rfZoom');
+    var zval = document.getElementById('rfZval');
+    var code = document.getElementById('rfCode');
+    var hintEl = document.getElementById('rfHint');
+
+    function readInit() {
+      try { var s = JSON.parse(localStorage.getItem('mw_reframe') || ''); if (s && isFinite(s.z)) return s; } catch (e) {}
+      var cs = getComputedStyle(img);
+      function num(v) { v = parseFloat(v); return isFinite(v) ? v : 0; }
+      return { z: num(cs.getPropertyValue('--photo-zoom')) || 1, x: num(cs.getPropertyValue('--photo-x')), y: num(cs.getPropertyValue('--photo-y')) };
+    }
+    var st = readInit();
+
+    function apply(save) {
+      var m = (st.z - 1) * 50;
+      st.x = Math.max(-m, Math.min(m, st.x));
+      st.y = Math.max(-m, Math.min(m, st.y));
+      img.style.setProperty('--photo-zoom', String(Number(st.z.toFixed(3))));
+      img.style.setProperty('--photo-x', Math.round(st.x) + '%');
+      img.style.setProperty('--photo-y', Math.round(st.y) + '%');
+      zoom.value = st.z;
+      zval.textContent = st.z.toFixed(2) + '×';
+      var z = Number(st.z.toFixed(2)), x = Math.round(st.x), y = Math.round(st.y);
+      code.textContent = '--photo-zoom:' + z + '; --photo-x:' + x + '%; --photo-y:' + y + '%;';
+      if (save) { try { localStorage.setItem('mw_reframe', JSON.stringify(st)); } catch (e) {} }
+    }
+
+    frame.style.cursor = 'grab';
+    var d = null;
+    frame.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      e.preventDefault();
+      try { frame.setPointerCapture(e.pointerId); } catch (_) {}
+      var r = frame.getBoundingClientRect();
+      d = { px: e.clientX, py: e.clientY, x0: st.x, y0: st.y, w: r.width, h: r.height };
+      frame.style.cursor = 'grabbing';
+      if (hintEl) hintEl.style.display = 'none';
+    });
+    frame.addEventListener('pointermove', function (e) {
+      if (!d) return;
+      st.x = d.x0 + (e.clientX - d.px) / d.w * 100;
+      st.y = d.y0 + (e.clientY - d.py) / d.h * 100;
+      apply(true);
+    });
+    function up(e) { if (d) { d = null; frame.style.cursor = 'grab'; try { frame.releasePointerCapture(e.pointerId); } catch (_) {} } }
+    frame.addEventListener('pointerup', up);
+    frame.addEventListener('pointercancel', up);
+    frame.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      st.z = Math.max(1, Math.min(3, st.z * Math.pow(1.0015, -e.deltaY)));
+      apply(true);
+    }, { passive: false });
+
+    zoom.addEventListener('input', function () { st.z = parseFloat(zoom.value); apply(true); });
+    document.getElementById('rfReset').addEventListener('click', function () {
+      st = { z: 1, x: 0, y: 0 };
+      try { localStorage.removeItem('mw_reframe'); } catch (e) {}
+      if (hintEl) hintEl.style.display = '';
+      apply(false);
+    });
+    document.getElementById('rfCopy').addEventListener('click', function () {
+      var t = code.textContent, b = this, o = b.textContent;
+      function ok() { b.textContent = 'skopiowano ✓'; setTimeout(function () { b.textContent = o; }, 1400); }
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(ok, ok); } else { ok(); }
+    });
+    document.getElementById('rfHide').addEventListener('click', function () { panel.remove(); frame.style.cursor = ''; });
+
+    apply(false);
+  })();
+</script>
