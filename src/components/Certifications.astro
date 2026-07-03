@@ -1,7 +1,6 @@
 ---
 import { content } from '../content';
 import { L, t, type Lang } from '../i18n';
-import Placeholder from './Placeholder.astro';
 import Education from './Education.astro';
 
 interface Props {
@@ -19,7 +18,13 @@ const { lang } = Astro.props;
       <div class="cert">
         <div class="badge-wrap">
           <div class="badge-glow"></div>
-          <Placeholder class="badge-slot" label="badge" />
+          {c.badgeImage ? (
+            <div class="badge-slot">
+              <img class="badge-img" src={c.badgeImage} alt={`${L(c.name, lang)} — badge`} width="220" height="220" loading="lazy" decoding="async" />
+            </div>
+          ) : (
+            <div class="badge-slot badge-fallback"><span>{c.issuer}</span></div>
+          )}
         </div>
         <div style="display:flex;flex-direction:column;gap:6px">
           <h3>{L(c.name, lang)}</h3>
