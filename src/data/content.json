@@ -29,7 +29,7 @@
     "education": { "en": "Education", "pl": "Wykształcenie" },
     "graduated": { "en": "Graduated", "pl": "Ukończono" },
     "viewCred": { "en": "View credential", "pl": "Zobacz certyfikat" },
-    "badgeHint": { "en": "drop each AWS / Credly badge onto its tile", "pl": "przeciągnij każdy badge AWS / Credly na kafelek" },
+    "badgeHint": { "en": "AWS & AI certifications", "pl": "Certyfikaty AWS i AI" },
     "contactSub": {
       "en": "Let’s talk about how I can help your team ship reliable, AI-driven systems.",
       "pl": "Porozmawiajmy, jak mogę pomóc Twojemu zespołowi dostarczać niezawodne systemy oparte na AI."
@@ -171,10 +171,11 @@
     }
   ],
   "certs": [
-    { "name": { "en": "AWS Certified Generative AI Developer — Professional", "pl": "AWS Certified Generative AI Developer — Professional" }, "year": "2026", "issuer": "Amazon Web Services", "credly": true, "url": "https://www.credly.com/", "badgeImage": "" },
-    { "name": { "en": "AWS Certified AI — Practitioner", "pl": "AWS Certified AI — Practitioner" }, "year": "2026", "issuer": "Amazon Web Services", "credly": true, "url": "https://www.credly.com/", "badgeImage": "" },
+    { "name": { "en": "AWS Certified Generative AI Developer — Professional", "pl": "AWS Certified Generative AI Developer — Professional" }, "year": "2026", "issuer": "Amazon Web Services", "credly": true, "url": "https://www.credly.com/", "badgeImage": "/badges/aws-genai-developer-professional.png" },
+    { "name": { "en": "AWS Certified Generative AI Developer — Professional (Early Adopter)", "pl": "AWS Certified Generative AI Developer — Professional (Early Adopter)" }, "year": "2026", "issuer": "Amazon Web Services", "credly": true, "url": "https://www.credly.com/", "badgeImage": "/badges/aws-genai-developer-professional-early-adopter.png" },
+    { "name": { "en": "AWS Certified AI — Practitioner", "pl": "AWS Certified AI — Practitioner" }, "year": "2026", "issuer": "Amazon Web Services", "credly": true, "url": "https://www.credly.com/", "badgeImage": "/badges/aws-ai-practitioner.png" },
     { "name": { "en": "AI devs 3 Reloaded — Advanced AI Agents & LLM Systems", "pl": "AI devs 3 Reloaded — Zaawansowani agenci AI i systemy LLM" }, "year": "2025", "issuer": "AI devs", "credly": false, "url": "", "badgeImage": "" },
-    { "name": { "en": "AWS Certified Developer — Associate", "pl": "AWS Certified Developer — Associate" }, "year": "2024", "issuer": "Amazon Web Services", "credly": true, "url": "https://www.credly.com/", "badgeImage": "" }
+    { "name": { "en": "AWS Certified Developer — Associate", "pl": "AWS Certified Developer — Associate" }, "year": "2024", "issuer": "Amazon Web Services", "credly": true, "url": "https://www.credly.com/", "badgeImage": "/badges/aws-developer-associate.png" }
   ],
   "education": {
     "school": { "en": "Gdańsk University of Technology", "pl": "Politechnika Gdańska" },
