@@ -109,10 +109,13 @@ h1{font-size:52px;line-height:1.02;font-weight:700;letter-spacing:-.02em;margin:
 /* ---- Education diploma card ---- */
 .edu{margin-top:36px;position:relative;border:1px solid var(--line2);border-radius:16px;overflow:hidden;background:linear-gradient(135deg,var(--bg2),var(--bg3))}
 .edu-top{height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
-.edu-body{display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:center;padding:30px 32px}
-.edu-crest-wrap{position:relative;width:108px;height:108px;display:flex;align-items:center;justify-content:center;flex:none}
-.edu-crest-glow{position:absolute;inset:2px;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 68%);filter:blur(9px);animation:glowPulse 3.8s ease-in-out infinite}
-.edu-crest{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;color:var(--txt3);width:108px;height:108px;border-radius:50%;border:1px solid var(--line2);background:radial-gradient(circle at 50% 40%,var(--elev),var(--bg2))}
+.edu-body{display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:center;padding:26px 32px}
+.edu-logo-wrap{flex:none;line-height:0}
+.edu-logo{height:120px;width:auto;display:block;object-fit:contain}
+/* Theme-swap the two official colourways: base navy on the light surface, reversed/white
+   on the dark surface (manual p.9–10). */
+:root[data-theme="dark"] .edu-logo--light{display:none}
+:root[data-theme="light"] .edu-logo--dark{display:none}
 .edu-year{text-align:center;padding-left:28px;border-left:1px solid var(--line);flex:none}
 .corner{position:absolute;width:14px;height:14px}
 .corner.tl{left:16px;top:19px;border-left:1px solid var(--line2);border-top:1px solid var(--line2)}
@@ -146,7 +149,7 @@ footer{text-align:center;font:400 11.5px 'IBM Plex Mono',monospace;color:var(--t
 
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce){
-  .badge-glow,.edu-crest-glow{animation:none}
+  .badge-glow{animation:none}
   .blink{animation:none}
   html{scroll-behavior:auto}
 }

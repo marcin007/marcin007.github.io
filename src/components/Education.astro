@@ -1,27 +1,34 @@
 ---
 import { content } from '../content';
 import { L, t, type Lang } from '../i18n';
-import Placeholder from './Placeholder.astro';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
 const e = content.education;
+
+// Official vertical lockup (godło above the name), full solid-fill mark from the Księga
+// Identyfikacji Wizualnej (p.4–5): "POLITECHNIKA GDAŃSKA" on /pl, "GDAŃSK UNIVERSITY OF
+// TECHNOLOGY" on the default route. Proper theme-swap of the two official colourways —
+// base navy on the light surface, reversed/white on the dark surface (manual p.9–10). Full
+// lockup only, never the crest alone (p.12); no effects; clear space preserved (p.7).
+const logo = lang === 'pl'
+  ? { navy: '/pg-logo-pl-navy.png', white: '/pg-logo-pl-white.png', w: 709, h: 480 }
+  : { navy: '/pg-logo-en-navy.svg', white: '/pg-logo-en-white.svg', w: 413, h: 252 };
 ---
 
 <div class="edu">
   <div class="edu-top"></div>
   <span class="corner tl"></span><span class="corner br"></span>
   <div class="edu-body">
-    <div class="edu-crest-wrap">
-      <div class="edu-crest-glow"></div>
-      <Placeholder class="edu-crest" label="logo" />
+    <div class="edu-logo-wrap">
+      <img class="edu-logo edu-logo--light" src={logo.navy} width={logo.w} height={logo.h} alt={L(e.school, lang)} />
+      <img class="edu-logo edu-logo--dark" src={logo.white} width={logo.w} height={logo.h} alt={L(e.school, lang)} />
     </div>
-    <div>
-      <div class="mono" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accentTx);margin-bottom:11px">{t('education', lang)}</div>
-      <div style="font-size:22px;font-weight:700;letter-spacing:-.01em;line-height:1.15">{L(e.school, lang)}</div>
-      <div style="font-size:14.5px;color:var(--txt2);margin-top:7px">{L(e.degreeTitle, lang)} · {L(e.field, lang)}</div>
+    <div class="edu-id">
+      <div class="mono" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accentTx);margin-bottom:13px">{t('education', lang)}</div>
+      <div style="font-size:14.5px;color:var(--txt2);line-height:1.4">{L(e.degreeTitle, lang)} · {L(e.field, lang)}</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:15px">
         <span class="pill"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent2)"></span>{L(e.location, lang)}</span>
       </div>
