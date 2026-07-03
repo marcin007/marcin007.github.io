@@ -1,4 +1,6 @@
-# Agent Workflow
+# AGENTS.md — marcin007.github.io
+
+## Agent Workflow
 
 Before making any code, content, or asset changes, always base the work on the latest `master` from the remote (`origin/master`). Do not rely on the local `master` branch unless it has just been fast-forwarded from `origin/master`.
 
@@ -21,3 +23,18 @@ Before making any code, content, or asset changes, always base the work on the l
 4. Preserve user work. Never discard or overwrite uncommitted changes; if the correct branch is ambiguous, stop and ask which branch/worktree should receive the change.
 
 This rule exists to avoid applying fixes to a stale worktree while newer portfolio changes have already landed on remote `master`.
+
+## Frontend Preview Rule
+
+Whenever an agent makes a browser-visible frontend change, it must run the site locally
+before marking the work done and give the user the exact clickable localhost URL.
+
+- Use the dedicated preview range `43110`–`43119`.
+- Start with `http://localhost:43110`; if busy, increment within the range.
+- Bind to localhost explicitly:
+  ```bash
+  npm run dev -- --host 127.0.0.1 --port 43110
+  ```
+- Do not use Astro defaults `4321` or `4322` for agent previews, to avoid collisions with
+  Claude Code or other local checkouts.
+- State the port actually used in the final response.

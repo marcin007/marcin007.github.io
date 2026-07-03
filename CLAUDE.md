@@ -10,17 +10,15 @@ Whenever you make a change that shows up in the browser (a component, style, con
 page), you MUST run it locally and hand the user a link before calling the change done:
 
 1. **Start the dev server** (`npm run dev`, Astro HMR).
-2. **Never assume port 4321 is free** — a stale `astro dev` is often already bound to it,
-   which causes a port collision. Start on an explicit alternate port, and if that one is
-   taken too, bump to the next free port:
+2. **Use the dedicated frontend preview port range `43110`–`43119`**. Start at `43110`,
+   and if that one is taken, bump to the next free port in that range:
    ```bash
-   npm run dev -- --port 4322      # then 4323, 4324, … if in use
+   npm run dev -- --host 127.0.0.1 --port 43110
    ```
-   `.claude/launch.json` (config name `astro-dev`) is already pinned to port **4322** for
-   the preview tooling. If 4321 is occupied by another checkout, leave it alone — just use
-   your own port.
+   Do not use the default Astro ports (`4321`, `4322`) for agent-run previews; those may be
+   occupied by Claude Code or another checkout.
 3. **Always give the user a clickable localhost link** for the port you actually used
-   (e.g. `http://localhost:4322`) so they can open it in their own external browser. State
+   (e.g. `http://localhost:43110`) so they can open it in their own external browser. State
    which port it's on.
 
 Do not report a visual change as finished without that local link. HMR is on, so the user
