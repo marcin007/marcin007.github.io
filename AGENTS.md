@@ -38,3 +38,16 @@ before marking the work done and give the user the exact clickable localhost URL
 - Do not use Astro defaults `4321` or `4322` for agent previews, to avoid collisions with
   Claude Code or other local checkouts.
 - State the port actually used in the final response.
+
+## GitHub CI/CD Rule
+
+After publishing changes to GitHub, do not treat the work as finished while the relevant
+GitHub Actions state is unknown.
+
+- For PRs and pushed branches, check the `CI` workflow.
+- For merges or direct pushes to `master`, check `Deploy to GitHub Pages`.
+- If a GitHub Actions run fails in a way that looks transient, rerun failed jobs once:
+  ```sh
+  gh run rerun <run-id> --failed
+  ```
+- If the retry fails, inspect the logs and fix the root cause before calling the work done.
