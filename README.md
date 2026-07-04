@@ -38,9 +38,10 @@ Pushing to `master` triggers `.github/workflows/deploy.yml`, which builds with A
 and publishes to GitHub Pages. Pull requests and non-`master` pushes run
 `.github/workflows/ci.yml` so build failures show up before merge.
 
-If the Pages deploy workflow fails, `.github/workflows/retry-deploy.yml` reruns the failed
-jobs once using GitHub CLI. A second failure remains red so the logs can be inspected and
-fixed instead of looping forever.
+If the Pages deploy workflow fails, `.github/workflows/retry-deploy.yml` appears in Actions
+as `Pages deploy watchdog` and reruns the failed jobs once using GitHub CLI. Successful
+deploys leave the watchdog run neutral because there is nothing to retry. A second deploy
+failure remains red so the logs can be inspected and fixed instead of looping forever.
 
 **One-time setup:** GitHub → repo **Settings → Pages → Build and deployment →
 Source: GitHub Actions**.
