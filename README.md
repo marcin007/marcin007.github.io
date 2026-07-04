@@ -41,7 +41,7 @@ Source: GitHub Actions**.
 
 - Profile photo (hero), 4 certification badges, and the university crest — drop the
   files into `src/` and swap the `<Placeholder>` elements for `astro:assets` `<Image>`.
-- Real LinkedIn / GitHub URLs and per-badge Credly links in `src/data/content.json`
+- Real GitHub URL and per-badge Credly links in `src/data/content.json`
   (`profile.links`, `certs[].url`).
 
 ## Adding animations later

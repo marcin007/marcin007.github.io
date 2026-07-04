@@ -9,7 +9,7 @@
     "email": "marcinwojciechowski7@icloud.com",
     "phone": "+48 507 705 977",
     "cv": "public/Marcin-Wojciechowski-CV.pdf",
-    "links": { "linkedin": "#", "github": "#", "credly": "https://www.credly.com/" }
+    "links": { "github": "#", "credly": "https://www.credly.com/" }
   },
   "ui": {
     "about": { "en": "About", "pl": "O mnie" },
