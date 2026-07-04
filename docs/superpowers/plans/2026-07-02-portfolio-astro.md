@@ -207,7 +207,7 @@ export interface Profile {
   email: string;
   phone: string;
   cv: string;
-  links: { linkedin: string; github: string; credly: string };
+  links: { github: string; credly: string };
 }
 
 export interface Content {
@@ -1080,7 +1080,6 @@ const p = content.profile;
       </div>
       <div class="links-row">
         <span><span style="color:var(--txt3)">tel</span> {p.phone}</span>
-        <a href={p.links.linkedin}>LinkedIn ↗</a>
         <a href={p.links.github}>GitHub ↗</a>
         <a href={p.links.credly} target="_blank" rel="noopener">Credly ↗</a>
       </div>
@@ -1318,7 +1317,7 @@ Source: GitHub Actions**.
 
 - Profile photo (hero), 4 certification badges, university crest — drop files in
   `src/` and swap the `<Placeholder>` elements for `astro:assets` `<Image>`.
-- Real LinkedIn / GitHub URLs and per-badge Credly links in `src/data/content.json`
+- Real GitHub URL and per-badge Credly links in `src/data/content.json`
   (`profile.links`, `certs[].url`).
 ```
 

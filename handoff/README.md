@@ -100,7 +100,7 @@ interface Content {
     email: string;
     phone: string;              // display form, e.g. "+48 507 705 977"
     cv: string;                 // path to the PDF
-    links: { linkedin: string; github: string; credly: string };
+    links: { github: string; credly: string };
   };
   ui: Record<string, Localized>;            // every interface string, keyed
   metrics: { value: string; label: Localized }[];
@@ -162,7 +162,7 @@ Rebuild top to bottom (each maps to a function of the same idea in `index.html`)
    the **Problem → Approach → Impact** highlight blocks (Mercedes & Volkswagen have them),
    and "core scope" bullets.
 7. **Contact** (`contact()`) — `contact.sh` terminal panel: heading, sub, CV + email buttons,
-   and a links row (LinkedIn / GitHub / Credly). Footer line.
+   and a links row (GitHub / Credly). Footer line.
 
 ### Images
 The prototype uses `<image-slot>` (client-side drag-drop, localStorage-persisted) so Marcin
@@ -188,7 +188,7 @@ can preview with his own files. For the real site, pick one:
 
 ## 8. ⚠️ Real data to fill before launch (currently placeholders)
 
-- **LinkedIn & GitHub URLs** — `profile.links` are `#`.
+- **GitHub URL** — `profile.links.github` is `#`.
 - **Exact Credly credential URLs** — all point to `credly.com`; use the real badge share links.
 - **Profile photo** — hero slot is empty.
 - **Certification badge images** — the 4 AWS/Credly PNGs (`certs[].badgeImage`).

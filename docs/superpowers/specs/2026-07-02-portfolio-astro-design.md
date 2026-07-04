@@ -67,7 +67,7 @@ Wierny, produkcyjny port prototypu `handoff/index.html` na **Astro + TypeScript*
 - **Education.astro** — karta „dyplom": crest (`Placeholder`), dwujęzyczna nazwa uczelni, stopień/kierunek, pill lokalizacji, duży rok ukończenia.
 - **Experience.astro** (`experience()`) — timeline; nagłówek `$ git log --oneline --all`; mapuje `jobs` na `JobCard`.
 - **JobCard.astro** — szyna (węzeł amber gdy `current`, fake git hash, okres) + karta: firma/rola, tagi tech, kontekst, bloki **Problem → Approach → Impact** (gdy `highlights`), bullety „core scope".
-- **Contact.astro** (`contact()`) — panel `contact.sh`: nagłówek z migającym kursorem, sub, przyciski CV + email, wiersz linków (LinkedIn / GitHub / Credly), stopka.
+- **Contact.astro** (`contact()`) — panel `contact.sh`: nagłówek z migającym kursorem, sub, przyciski CV + email, wiersz linków (GitHub / Credly), stopka.
 - **Placeholder.astro** — elegancki placeholder (kształt: `rect|rounded|circle`) w miejscu brakującego obrazu; wyraźnie oznaczony punkt podmiany na `<Image>`.
 
 ## 5. Dane i i18n
@@ -97,7 +97,7 @@ Wierny, produkcyjny port prototypu `handoff/index.html` na **Astro + TypeScript*
 
 ## 9. Do uzupełnienia przed launchem (oznaczone w kodzie)
 
-- Realne URL-e **LinkedIn** i **GitHub** (w danych `#`).
+- Realny URL **GitHub** (w danych `#`).
 - Realne linki **Credly** do konkretnych badge'y (teraz generyczne).
 - **Zdjęcie** profilowe, **4 badge** certyfikatów, **crest** uczelni.
 - Sanity-check dat/tytułów względem aktualnego CV.

@@ -56,7 +56,7 @@ export interface Profile {
   email: string;
   phone: string;
   cv: string;
-  links: { linkedin: string; github: string; credly: string };
+  links: { github: string; credly: string };
 }
 
 export interface Content {
