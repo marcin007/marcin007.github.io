@@ -1,5 +1,8 @@
 # marcin007.github.io
 
+[![CI](https://github.com/marcin007/marcin007.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/marcin007/marcin007.github.io/actions/workflows/ci.yml)
+[![Deploy to GitHub Pages](https://github.com/marcin007/marcin007.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/marcin007/marcin007.github.io/actions/workflows/deploy.yml)
+
 Personal portfolio — bilingual (EN/PL), dark/light, built with **Astro + TypeScript**.
 Live at https://marcin007.github.io/ (EN) and https://marcin007.github.io/pl/ (PL).
 
@@ -32,7 +35,12 @@ the two routes (`src/pages/index.astro`, `src/pages/pl/index.astro`) render the 
 ## Deploy
 
 Pushing to `master` triggers `.github/workflows/deploy.yml`, which builds with Astro
-and publishes to GitHub Pages.
+and publishes to GitHub Pages. Pull requests and non-`master` pushes run
+`.github/workflows/ci.yml` so build failures show up before merge.
+
+If the Pages deploy workflow fails, `.github/workflows/retry-deploy.yml` reruns the failed
+jobs once using GitHub CLI. A second failure remains red so the logs can be inspected and
+fixed instead of looping forever.
 
 **One-time setup:** GitHub → repo **Settings → Pages → Build and deployment →
 Source: GitHub Actions**.
