@@ -47,7 +47,9 @@ section{scroll-margin-top:70px}
 /* ---- Hero ---- */
 .hero{padding:52px 44px 44px;display:grid;grid-template-columns:1.38fr 1fr;gap:44px;align-items:stretch}
 .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;background:var(--chip);border:1px solid var(--line);font:500 12px 'IBM Plex Mono',monospace;color:var(--txt2)}
-.status-dot{width:8px;height:8px;border-radius:50%;background:#28c840;box-shadow:0 0 0 3px rgba(40,200,64,.18)}
+.status-dot{position:relative;width:8px;height:8px;border-radius:50%;background:#28c840;box-shadow:0 0 0 3px rgba(40,200,64,.18)}
+.status-dot::after{content:'';position:absolute;inset:0;border-radius:50%;background:#28c840;animation:statusPing 2.2s cubic-bezier(0,0,.2,1) infinite}
+@keyframes statusPing{0%{transform:scale(1);opacity:.5}70%,100%{transform:scale(3.4);opacity:0}}
 .kicker{font:500 13px 'IBM Plex Mono',monospace;color:var(--accentTx);letter-spacing:.04em;margin:22px 0 10px}
 h1{font-size:52px;line-height:1.02;font-weight:700;letter-spacing:-.02em;margin:0 0 20px}
 .lede{font-size:16px;line-height:1.7;color:var(--txt2);max-width:56ch;margin:0 0 26px}
@@ -171,6 +173,7 @@ footer{text-align:center;font:400 11.5px 'IBM Plex Mono',monospace;color:var(--t
 @media (prefers-reduced-motion: reduce){
   .badge-glow{animation:none}
   .blink{animation:none}
+  .status-dot::after{animation:none;opacity:0}
   html{scroll-behavior:auto}
   /* safety net: never keep timeline content hidden for reduced-motion users */
   .js-reveal #experience .job,
