@@ -13,7 +13,7 @@ const { job, lang } = Astro.props;
   <div class="job-rail">
     <div style="display:flex;align-items:center;gap:9px">
       <span class="job-node" style={`border:3px solid ${job.dot}`}></span>
-      <span class="mono" style="font-size:12px;color:var(--txt3)">{job.hash}</span>
+      <span class="mono j-hash" style="font-size:12px;color:var(--txt3)">{job.hash}</span>
     </div>
     <div class="mono" style="font-size:12px;color:var(--txt2);margin:10px 0 0 22px">{job.period}<span style="color:var(--accentTx)">{job.periodEnd ? L(job.periodEnd, lang) : ''}</span></div>
     <div class="job-line"></div>
@@ -25,14 +25,14 @@ const { job, lang } = Astro.props;
       <span style="font-size:15px;color:var(--txt2)">{L(job.role, lang)}</span>
       {job.current && <span class="job-tag">● {t('present', lang)}</span>}
     </div>
-    <div class="tech-row">{job.tech.map((x) => <span class="tech">{x}</span>)}</div>
+    <div class="tech-row">{job.tech.map((x, i) => <span class="tech" style={`--i:${i}`}>{x}</span>)}</div>
     <p style="font-size:14px;line-height:1.65;color:var(--txt2);margin:0">{L(job.context, lang)}</p>
     {job.highlights && job.highlights.length > 0 && (
       <Fragment>
         <div class="hl-label" style="margin:22px 0 12px">{t('keyAchievements', lang)}</div>
         <div style="display:flex;flex-direction:column;gap:12px">
-          {job.highlights.map((h) => (
-            <div class="hl">
+          {job.highlights.map((h, i) => (
+            <div class="hl" style={`--i:${i}`}>
               <div class="hl-title">{L(h.title, lang)}</div>
               <div class="hl-grid">
                 <span class="hl-k" style="color:#ff5f57">{t('problem', lang)}</span><span style="color:var(--txt2)">{L(h.problem, lang)}</span>
@@ -45,6 +45,6 @@ const { job, lang } = Astro.props;
       </Fragment>
     )}
     <div class="hl-label" style="margin:20px 0 10px">{t('coreScope', lang)}</div>
-    <ul class="points">{job.points.map((pt) => <li><span class="mk">▸</span><span>{L(pt, lang)}</span></li>)}</ul>
+    <ul class="points">{job.points.map((pt, i) => <li style={`--i:${i}`}><span class="mk">▸</span><span>{L(pt, lang)}</span></li>)}</ul>
   </div>
 </div>

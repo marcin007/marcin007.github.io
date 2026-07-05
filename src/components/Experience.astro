@@ -14,3 +14,73 @@ const { lang } = Astro.props;
   <h2 class="sec-title">{t('experience', lang)}</h2>
   {content.jobs.map((job) => <JobCard job={job} lang={lang} />)}
 </section>
+
+<script>
+  // Timeline reveal for #experience — progressive enhancement.
+  // Cards fade/slide up as they enter the viewport (rail draws down, node glows,
+  // tech/highlights/points cascade), and each job hash "decodes": every char scrambles
+  // in amber then locks to its final value one-by-one from the left, the last char longest.
+  (function () {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const jobs = Array.from(document.querySelectorAll<HTMLElement>('#experience .job'));
+    if (reduce || !('IntersectionObserver' in window) || !jobs.length) return; // leave SSR content visible
+
+    const HEX = '0123456789abcdef';
+    function randChar(ch: string): string {
+      if (/[0-9a-f]/i.test(ch)) return HEX[(Math.random() * 16) | 0];
+      if (/[a-z]/.test(ch)) return String.fromCharCode(97 + ((Math.random() * 26) | 0));
+      if (/[A-Z]/.test(ch)) return String.fromCharCode(65 + ((Math.random() * 26) | 0));
+      return ch;
+    }
+
+    function decodeHash(el: Element | null): void {
+      if (!el) return;
+      const full = (el.textContent || '').trim();
+      if (!full) return;
+      const n = full.length;
+      const durMain = 1250, durLastExtra = 650, total = durMain + durLastExtra, flipEvery = 55;
+      const lockAt: number[] = [];
+      for (let i = 0; i < n; i++) lockAt[i] = i < n - 1 ? ((i + 1) / (n - 1)) * durMain : total;
+      el.textContent = '';
+      const span: HTMLSpanElement[] = [], scr: string[] = [];
+      for (let k = 0; k < n; k++) {
+        scr[k] = randChar(full[k]);
+        const s = document.createElement('span');
+        s.className = 'dec';
+        s.textContent = scr[k];
+        el.appendChild(s);
+        span[k] = s;
+      }
+      let start = -1, lastFlip = 0;
+      function step(ts: number): void {
+        if (start < 0) { start = ts; lastFlip = ts; }
+        const t = ts - start, flip = ts - lastFlip >= flipEvery;
+        if (flip) lastFlip = ts;
+        for (let i = 0; i < n; i++) {
+          if (t >= lockAt[i]) {
+            if (span[i].className) { span[i].className = ''; span[i].textContent = full[i]; }
+          } else if (flip) {
+            scr[i] = randChar(full[i]);
+            span[i].textContent = scr[i];
+          }
+        }
+        if (t < total) requestAnimationFrame(step);
+        else for (let m = 0; m < n; m++) { span[m].className = ''; span[m].textContent = full[m]; }
+      }
+      requestAnimationFrame(step);
+      setTimeout(function () { el.textContent = full; }, total + 400); // safety net if rAF is throttled
+    }
+
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        decodeHash(e.target.querySelector('.j-hash'));
+        io.unobserve(e.target); // reveal once
+      });
+    }, { rootMargin: '0px 0px -18% 0px', threshold: 0 });
+
+    document.documentElement.classList.add('js-reveal'); // enable hidden-until-revealed CSS
+    jobs.forEach(function (j) { io.observe(j); });
+  })();
+</script>
