@@ -29,7 +29,6 @@
     "education": { "en": "Education", "pl": "Wykształcenie" },
     "graduated": { "en": "Graduated", "pl": "Ukończono" },
     "viewCred": { "en": "View credential", "pl": "Zobacz certyfikat" },
-    "badgeHint": { "en": "AWS & AI certifications", "pl": "Certyfikaty AWS i AI" },
     "contactSub": {
       "en": "Let’s talk about how I can help your team ship reliable, AI-driven systems.",
       "pl": "Porozmawiajmy, jak mogę pomóc Twojemu zespołowi dostarczać niezawodne systemy oparte na AI."
