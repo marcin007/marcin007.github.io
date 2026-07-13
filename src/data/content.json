@@ -83,7 +83,8 @@
         { "en": "Backend engineering in Java & Spring Boot — designed, developed and refactored for scalability and architecture quality.", "pl": "Inżynieria backendu w Javie i Spring Boot — projektowanie, rozwój i refaktoryzacja pod kątem skalowalności i jakości architektury." },
         { "en": "End-to-end full-stack delivery across frontend and BFF layers with TypeScript and Next.js.", "pl": "Dostarczanie full-stack end-to-end w warstwie frontend i BFF z TypeScript i Next.js." },
         { "en": "Cloud-native development on AWS: Lambda, SNS, DynamoDB, OpenSearch, RDS.", "pl": "Rozwój chmurowy na AWS: Lambda, SNS, DynamoDB, OpenSearch, RDS." },
-        { "en": "Infrastructure & CI/CD ownership with Terraform; production monitoring and stability.", "pl": "Odpowiedzialność za infrastrukturę i CI/CD z Terraform; monitoring i stabilność produkcji." }
+        { "en": "Infrastructure & CI/CD ownership with Terraform; production monitoring and stability.", "pl": "Odpowiedzialność za infrastrukturę i CI/CD z Terraform; monitoring i stabilność produkcji." },
+        { "en": "AI-driven operational solutions — designed and delivered AI-based tooling in Python and LangChain to streamline operations and reduce manual effort.", "pl": "Rozwiązania operacyjne oparte na AI — projektowanie i dostarczanie narzędzi w Pythonie i LangChain, które usprawniają operacje i ograniczają pracę ręczną." }
       ],
       "tech": ["Java", "Spring Boot", "TypeScript", "Next.js", "AWS Lambda", "DynamoDB", "OpenSearch", "RDS", "Terraform", "Python", "LangChain", "RAG", "GitHub Copilot", "MCP"]
     },
@@ -118,7 +119,7 @@
       "tech": ["Java", "RxJava", "MVVM", "Android", "Bamboo", "SonarQube", "AWS CloudWatch", "S3", "EC2", "Black Duck"]
     },
     {
-      "company": "Silky Coders · LPP", "hash": "3c81a5f", "current": false, "dot": "#8e8e93",
+      "company": "Silky Coders powered by LPP", "hash": "3c81a5f", "current": false, "dot": "#8e8e93",
       "role": { "en": "Java Developer", "pl": "Java Developer" },
       "period": "10.2020 — 10.2022", "periodEnd": null,
       "context": {
@@ -131,9 +132,10 @@
         { "en": "Contributed to rewriting parts of the platform into microservices.", "pl": "Współtworzyłem przepisywanie części platformy na mikroserwisy." },
         { "en": "Supported production deployments and monitored the environment to detect and resolve anomalies.", "pl": "Wspierałem wdrożenia produkcyjne i monitorowałem środowisko, wykrywając i usuwając anomalie." },
         { "en": "Configured Kubernetes and Jenkins; built Grafana dashboards; supported DB maintenance and migrations.", "pl": "Konfigurowałem Kubernetes i Jenkins; budowałem dashboardy w Grafanie; wspierałem utrzymanie i migracje baz." },
+        { "en": "Maintained Python scripts for stock reconciliation between warehouse and e-commerce systems, including troubleshooting, data validation and logic updates.", "pl": "Utrzymywałem skrypty Python do uzgadniania stanów magazynowych między systemami magazynowymi a e-commerce, w tym rozwiązywałem problemy, walidowałem dane i aktualizowałem logikę." },
         { "en": "Reduced database round-trips with Caffeine caching, improving performance.", "pl": "Ograniczyłem liczbę zapytań do bazy dzięki cache Caffeine, poprawiając wydajność." }
       ],
-      "tech": ["Java", "Spring", "ActiveMQ", "Kubernetes", "Jenkins", "Grafana", "Caffeine", "Microservices"]
+      "tech": ["Java", "Spring", "Python", "ActiveMQ", "Kubernetes", "Jenkins", "Grafana", "Caffeine", "Microservices"]
     },
     {
       "company": "Catobe", "hash": "e5d9210", "current": false, "dot": "#8e8e93",
@@ -162,11 +164,11 @@
       },
       "highlights": [],
       "points": [
-        { "en": "Developed C# scripts for test automation.", "pl": "Tworzyłem skrypty automatyzujące testy w C#." },
+        { "en": "Developed C# and Python scripts to automate BIOS validation, parse logs, aggregate test results and verify test-environment readiness.", "pl": "Tworzyłem skrypty w C# i Pythonie do automatyzacji walidacji BIOS-u, analizy logów, agregowania wyników testów i weryfikacji gotowości środowiska testowego." },
         { "en": "Created test plans and cases based on requirements and project documentation.", "pl": "Tworzyłem plany i przypadki testowe na podstawie wymagań i dokumentacji projektowej." },
         { "en": "Identified, reproduced and reported defects using HSDES and Jira.", "pl": "Identyfikowałem, odtwarzałem i raportowałem defekty z użyciem HSDES i Jira." }
       ],
-      "tech": ["C#", "UEFI / BIOS", "HSDES", "Jira", "Test Automation"]
+      "tech": ["C#", "Python", "UEFI / BIOS", "HSDES", "Jira", "Test Automation"]
     }
   ],
   "certs": [
